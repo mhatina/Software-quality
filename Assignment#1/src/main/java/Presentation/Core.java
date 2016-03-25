@@ -1,3 +1,6 @@
+package Presentation;
+
+import Presentation.ScreenManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

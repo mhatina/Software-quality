@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -44,38 +46,6 @@ public class Player {
         inputHandler = new PlayerMouseHandler();
     }
 
-    public void setBorderPosition(ScreenManager sm) {
-        switch (getCurrentDirection()) {
-            case 0:
-                if (getCenterY() > 0) {
-                    subtractFromCenterY(Main.MOVE_AMOUNT);
-                } else {
-                    setCenterY(sm.getHeight());
-                }
-                break;
-            case 1:
-                if (getCenterX() < sm.getWidth()) {
-                    addToCenterX(Main.MOVE_AMOUNT);
-                } else {
-                    setCenterX(0);
-                }
-                break;
-            case 2:
-                if (getCenterY() < sm.getHeight()) {
-                    addToCenterY(Main.MOVE_AMOUNT);
-                } else {
-                    setCenterY(0);
-                }
-                break;
-            case 3:
-                if (getCenterX() > 0) {
-                    subtractFromCenterX(Main.MOVE_AMOUNT);
-                } else {
-                    setCenterX(sm.getWidth());
-                }
-                break;
-        }
-    }
 
     public boolean hasCollided(Player player) {
         for (int x = 0; x < pathX.size(); x++) {

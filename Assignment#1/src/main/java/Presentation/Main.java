@@ -1,3 +1,8 @@
+package Presentation;
+
+import Model.PlayerManager;
+import Model.InputHandler;
+import Model.Player;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -32,7 +37,7 @@ public class Main extends Core {
 
     public void draw(Graphics2D g) {
         for (Player player : manager.getPlayers()) {
-            player.setBorderPosition(sm);
+            setBorderPosition(sm, player);
         }
 
         for (Player player : manager.getPlayers()) {
@@ -51,6 +56,39 @@ public class Main extends Core {
 
         for (Player player : manager.getPlayers()) {
             player.drawPath(g);
+        }
+    }
+
+    public void setBorderPosition(ScreenManager sm, Player player) {
+        switch (player.getCurrentDirection()) {
+            case 0:
+                if (player.getCenterY() > 0) {
+                    player.subtractFromCenterY(Main.MOVE_AMOUNT);
+                } else {
+                    player.setCenterY(sm.getHeight());
+                }
+                break;
+            case 1:
+                if (player.getCenterX() < sm.getWidth()) {
+                    player.addToCenterX(Main.MOVE_AMOUNT);
+                } else {
+                    player.setCenterX(0);
+                }
+                break;
+            case 2:
+                if (player.getCenterY() < sm.getHeight()) {
+                    player.addToCenterY(Main.MOVE_AMOUNT);
+                } else {
+                    player.setCenterY(0);
+                }
+                break;
+            case 3:
+                if (player.getCenterX() > 0) {
+                    player.subtractFromCenterX(Main.MOVE_AMOUNT);
+                } else {
+                    player.setCenterX(sm.getWidth());
+                }
+                break;
         }
     }
 }

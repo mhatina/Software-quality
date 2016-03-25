@@ -1,5 +1,6 @@
+package Model;
+
 import java.awt.event.*;
-import java.util.List;
 
 /**
  * Created by mhatina on 3/16/16.
