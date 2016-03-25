@@ -1,4 +1,6 @@
-package Model;
+package Model.PlayerBase;
+
+import Model.InputHandlers.PlayerMouseHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +27,7 @@ public class PlayerManager {
     }
 
     public void addPlayer(Player player) throws IllegalArgumentException {
-        if (player.getInputHandler() instanceof Player.PlayerMouseHandler) {
+        if (player.getInputHandler() instanceof PlayerMouseHandler) {
             if (playerWithMouseHandler == null)
                 playerWithMouseHandler = player;
             else
