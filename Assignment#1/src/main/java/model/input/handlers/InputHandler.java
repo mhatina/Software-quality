@@ -1,7 +1,7 @@
-package Model.InputHandlers;
+package model.input.handlers;
 
-import Model.PlayerBase.Player;
-import Model.PlayerBase.PlayerManager;
+import model.player.Player;
+import model.player.PlayerManager;
 
 import java.awt.event.*;
 
@@ -10,13 +10,19 @@ import java.awt.event.*;
  */
 public class InputHandler extends AInputHandler {
 
+    PlayerManager manager;
+
+    public InputHandler(PlayerManager manager) {
+        this.manager = manager;
+    }
+
     public void keyPressed(KeyEvent e) {
-        for (Player player : PlayerManager.getInstance().getPlayers())
+        for (Player player : manager.getPlayers())
             player.setDirection(player.getInputHandler().changeDirection(e, player.getDirection()));
     }
 
     public void mouseClicked(MouseEvent e) {
-        Player player = PlayerManager.getInstance().getPlayerWithMouseHandler();
+        Player player = manager.getPlayerWithMouseHandler();
         player.setDirection(player.getInputHandler().changeDirection(e, player.getDirection()));
     }
 }

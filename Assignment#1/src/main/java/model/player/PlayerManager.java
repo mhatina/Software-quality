@@ -1,6 +1,6 @@
-package Model.PlayerBase;
+package model.player;
 
-import Model.InputHandlers.PlayerMouseHandler;
+import model.input.handlers.PlayerMouseHandler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,15 +10,11 @@ import java.util.List;
  * Created by mhatina on 3/16/16.
  */
 public class PlayerManager {
-    private static PlayerManager ourInstance = new PlayerManager();
+
     private List<Player> players;
     private Player playerWithMouseHandler;
 
-    public static PlayerManager getInstance() {
-        return ourInstance;
-    }
-
-    private PlayerManager() {
+    public PlayerManager() {
         players = new ArrayList<Player>();
     }
 

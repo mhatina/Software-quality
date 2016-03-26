@@ -1,6 +1,6 @@
-package Model.InputHandlers;
+package model.input.handlers;
 
-import Model.PlayerBase.Direction;
+import model.player.Direction;
 
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
@@ -16,9 +16,9 @@ public class PlayerMouseHandler implements IPlayerInputHandler {
 
         MouseEvent mouseEvent = ((MouseEvent) inputEvent);
         if (mouseEvent.getButton() == MouseEvent.BUTTON1) {
-            return Direction.getValue((direction.getNumericDirection() - 1) % 4);
+            return direction.left();
         } else if (mouseEvent.getButton() == MouseEvent.BUTTON3) {
-            return Direction.getValue((direction.getNumericDirection() + 1) % 4);
+            return direction.right();
         }
 
         return direction;

@@ -1,6 +1,6 @@
-package Model.InputHandlers;
+package model.input.handlers;
 
-import Model.PlayerBase.Direction;
+import model.player.Direction;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;

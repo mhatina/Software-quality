@@ -1,4 +1,4 @@
-package Model.InputHandlers;
+package model.input.handlers;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

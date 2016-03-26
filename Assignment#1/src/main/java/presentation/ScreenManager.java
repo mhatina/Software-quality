@@ -1,4 +1,4 @@
-package Presentation;
+package presentation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Presentation.ScreenManager;
+import presentation.ScreenManager;
 
 public abstract class Core {
 
@@ -36,6 +36,7 @@ public abstract class Core {
             long timePassed = System.currentTimeMillis() - cumulativeTime;
             cumulativeTime += timePassed;
             update(timePassed);
+            screenManager.update();
             try {
                 Thread.sleep(20);
             } catch (Exception ex) {

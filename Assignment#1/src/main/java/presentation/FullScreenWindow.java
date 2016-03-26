@@ -1,4 +1,4 @@
-package Presentation;
+package presentation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.image.BufferStrategy;
 /**
  * Created by mhatina on 3/23/16.
  */
-public class FullScreenWindow {
+public class FullScreenWindow extends Bounds {
     private GraphicsDevice graphicsDevice;
 
     public FullScreenWindow(GraphicsDevice graphicsDevice) {
@@ -20,6 +20,8 @@ public class FullScreenWindow {
         f.setIgnoreRepaint(true);
         f.setResizable(false);
         graphicsDevice.setFullScreenWindow(f);
+        width = graphicsDevice.getFullScreenWindow().getWidth();
+        height = graphicsDevice.getFullScreenWindow().getHeight();
 
         if (dm != null && graphicsDevice.isDisplayChangeSupported()) {
             try {
@@ -52,24 +54,6 @@ public class FullScreenWindow {
 
     public Window getInstance() {
         return graphicsDevice.getFullScreenWindow();
-    }
-
-    public int getWidth() {
-        Window w = graphicsDevice.getFullScreenWindow();
-        if (w != null) {
-            return w.getWidth();
-        } else {
-            return 0;
-        }
-    }
-
-    public int getHeight() {
-        Window w = graphicsDevice.getFullScreenWindow();
-        if (w != null) {
-            return w.getHeight();
-        } else {
-            return 0;
-        }
     }
 
     public void restoreScreen() {
