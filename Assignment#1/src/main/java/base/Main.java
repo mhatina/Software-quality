@@ -8,6 +8,7 @@ import model.player.Direction;
 import model.player.Player;
 import model.player.PlayerManager;
 import model.player.Position;
+import presentation.DrawPlayer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -72,7 +73,7 @@ public class Main extends Core {
 
     private void drawPathOfPlayers(Graphics2D g) {
         for (Player player : manager.getPlayers()) {
-            player.drawPath(g);
+            DrawPlayer.drawPlayerPath(player, g);
         }
     }
 

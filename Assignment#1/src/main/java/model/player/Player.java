@@ -39,13 +39,6 @@ public class Player {
         position.moveInDirection(direction, bounds);
     }
 
-    public void drawPath(Graphics2D g) {
-        for (int i = 0; i < path.size(); i++) {
-            g.setColor(color);
-            g.fillRect(path.get(i).getX(), path.get(i).getY(), 10, 10);
-        }
-    }
-
     public void actualizePath() {
         path.add(new Position(position.getX(), position.getY()));
     }
@@ -60,6 +53,10 @@ public class Player {
 
     public IPlayerInputHandler getInputHandler() {
         return inputHandler;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public void setDirection(Direction direction) {

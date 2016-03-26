@@ -32,22 +32,6 @@ public class Position {
         this.y = y;
     }
 
-    public void addToX(int amount) {
-        x += amount;
-    }
-
-    public void addToY(int amount) {
-        y += amount;
-    }
-
-    public void subtractFromX(int amount) {
-        x -= amount;
-    }
-
-    public void subtractFromY(int amount) {
-        y -= amount;
-    }
-
     public void moveInDirection(Direction direction, Bounds bounds) {
         direction.alterPosition(this, bounds);
     }
