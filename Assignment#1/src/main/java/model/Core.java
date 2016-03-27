@@ -1,9 +1,15 @@
 package model;
 
+import presentation.FullScreenWindow;
 import presentation.ScreenManager;
 
-public abstract class Core {
+import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.util.function.Function;
 
+public class Core {
+    private Function<Long, Void> updateFunction;
     private boolean running;
     protected ScreenManager screenManager;
 
@@ -11,11 +17,11 @@ public abstract class Core {
         running = false;
     }
 
-    public void run() {
+    public void run() throws Exception {
         try {
             running = true;
 
-            init();
+            getFullScreenWindow().getInstance().requestFocusInWindow();
             gameLoop();
         } finally {
             screenManager.getFullScreenWindow().restoreScreen();
@@ -28,14 +34,14 @@ public abstract class Core {
         screenManager.hideCursor();
     }
 
-    public void gameLoop() {
+    public void gameLoop() throws Exception {
         long startTime = System.currentTimeMillis();
         long cumulativeTime = startTime;
 
         while (running) {
             long timePassed = System.currentTimeMillis() - cumulativeTime;
             cumulativeTime += timePassed;
-            update(timePassed);
+            updateFunction.apply(timePassed);
             screenManager.update();
             try {
                 Thread.sleep(20);
@@ -44,6 +50,21 @@ public abstract class Core {
         }
     }
 
-    public abstract void update(long timePassed);
+    public FullScreenWindow getFullScreenWindow() {
+        return screenManager.getFullScreenWindow();
+    }
 
+    public void setKeyListener(KeyListener keyListener) {
+        Window window = screenManager.getFullScreenWindow().getInstance();
+        window.addKeyListener(keyListener);
+    }
+
+    public void setMouseListener(MouseListener mouseListener) {
+        Window window = screenManager.getFullScreenWindow().getInstance();
+        window.addMouseListener(mouseListener);
+    }
+
+    public void setUpdateFunction(Function<Long, Void> updateFunction) {
+        this.updateFunction = updateFunction;
+    }
 }

@@ -8,23 +8,32 @@ import model.player.Direction;
 import model.player.Player;
 import model.player.PlayerManager;
 import model.player.Position;
-import presentation.DrawPlayer;
+import presentation.Draw;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.function.Function;
 
-public class Main extends Core {
+public class Main {
     PlayerManager manager;
+    Core gameCore;
 
     public static final int MOVE_AMOUNT = 5;
 
     public void init() {
-        super.init();
-
         manager = new PlayerManager();
+        gameCore = new Core();
+        gameCore.init();
 
-        createWindow();
+        gameCore.setUpdateFunction(new Update());
+        setListeners();
         createPlayers();
+    }
+
+    private void setListeners() {
+        InputHandler inputHandler = new InputHandler(manager);
+        gameCore.setKeyListener(inputHandler);
+        gameCore.setMouseListener(inputHandler);
     }
 
     private void createPlayers() {
@@ -40,46 +49,8 @@ public class Main extends Core {
                            Color.yellow));
     }
 
-    private void createWindow() {
-        InputHandler inputHandler = new InputHandler(manager);
-        Window w = screenManager.getFullScreenWindow().getInstance();
-        w.addKeyListener(inputHandler);
-        w.addMouseListener(inputHandler);
-    }
-
-    public static void main(String[] args) {
-        new Main().run();
-    }
-
-    @Override
-    public void update(long timePassed) {
-        movePlayers();
-        checkPlayersCollision();
-        actualizePathOfPlayers();
-
-        draw();
-    }
-
-    private void draw() {
-        Graphics2D g = screenManager.getFullScreenWindow().getGraphics();
-        draw(g);
-        g.dispose();
-    }
-
-    public void draw(Graphics2D g) {
-        erasePlayground(g);
-        drawPathOfPlayers(g);
-    }
-
-    private void drawPathOfPlayers(Graphics2D g) {
-        for (Player player : manager.getPlayers()) {
-            DrawPlayer.drawPlayerPath(player, g);
-        }
-    }
-
-    private void erasePlayground(Graphics2D g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, screenManager.getFullScreenWindow().getWidth(), screenManager.getFullScreenWindow().getHeight());
+    public void run() throws Exception {
+        gameCore.run();
     }
 
     private void actualizePathOfPlayers() {
@@ -92,14 +63,42 @@ public class Main extends Core {
         for (Player player : manager.getPlayers()) {
             for (Player opponent : manager.getPlayers()) {
                 if (player != opponent && player.hasCollided(opponent))
-                    stop();
+                    gameCore.stop();
             }
         }
     }
 
     private void movePlayers() {
         for (Player player : manager.getPlayers()) {
-            player.moveInDirection(screenManager.getFullScreenWindow());
+            player.moveInDirection(gameCore.getFullScreenWindow());
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            Main tron = new Main();
+            tron.init();
+            tron.run();
+            tron.exit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void exit() {
+        System.exit(0);
+    }
+
+    public class Update implements Function<Long, Void> {
+
+        public Void apply(Long aLong) {
+            movePlayers();
+            checkPlayersCollision();
+            actualizePathOfPlayers();
+
+            Draw.drawPlayground(gameCore.getFullScreenWindow(), manager.getPlayers());
+
+            return null;
         }
     }
 }
