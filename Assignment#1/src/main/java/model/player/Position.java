@@ -1,8 +1,6 @@
 package model.player;
 
-import base.Main;
 import presentation.Bounds;
-import presentation.ScreenManager;
 
 /**
  * Created by mhatina on 3/23/16.

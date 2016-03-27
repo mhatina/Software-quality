@@ -9,24 +9,24 @@ import java.util.List;
  * Created by mhatina on 3/26/16.
  */
 public class Draw {
-    private static void drawPlayerPath(Player player, Graphics2D g) {
+    private static void drawPlayerPath(Player player, Graphics2D graphics) {
         for (int i = 0; i < player.getPath().size(); i++) {
-            g.setColor(player.getColor());
-            g.fillRect(player.getPath().get(i).getX(), player.getPath().get(i).getY(), 10, 10);
+            graphics.setColor(player.getColor());
+            graphics.fillRect(player.getPath().get(i).getX(), player.getPath().get(i).getY(), 10, 10);
         }
     }
 
-    private static void erasePlayground(Graphics2D g, Bounds bounds) {
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, bounds.getWidth(), bounds.getHeight());
+    private static void erasePlayground(Graphics2D graphics, Bounds bounds) {
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0, 0, bounds.getWidth(), bounds.getHeight());
     }
 
     public static void drawPlayground(FullScreenWindow window, List<Player> players) {
-        Graphics2D g = window.getGraphics();
-        Draw.erasePlayground(g, window);
+        Graphics2D graphics = window.getGraphics();
+        Draw.erasePlayground(graphics, window);
         for (Player player : players) {
-            Draw.drawPlayerPath(player, g);
+            Draw.drawPlayerPath(player, graphics);
         }
-        g.dispose();
+        graphics.dispose();
     }
 }

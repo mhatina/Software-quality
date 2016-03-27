@@ -14,7 +14,7 @@ public class FullScreenWindow extends Bounds {
         this.graphicsDevice = graphicsDevice;
     }
 
-    public void setFullScreen(DisplayMode dm) {
+    public void setFullScreen(DisplayMode displayMode) {
         JFrame f = new JFrame();
         f.setUndecorated(true);
         f.setIgnoreRepaint(true);
@@ -23,9 +23,9 @@ public class FullScreenWindow extends Bounds {
         width = graphicsDevice.getFullScreenWindow().getWidth();
         height = graphicsDevice.getFullScreenWindow().getHeight();
 
-        if (dm != null && graphicsDevice.isDisplayChangeSupported()) {
+        if (displayMode != null && graphicsDevice.isDisplayChangeSupported()) {
             try {
-                graphicsDevice.setDisplayMode(dm);
+                graphicsDevice.setDisplayMode(displayMode);
             } catch (Exception ex) {
             }
             f.createBufferStrategy(2);
