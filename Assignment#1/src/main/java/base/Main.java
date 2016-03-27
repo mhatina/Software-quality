@@ -1,6 +1,5 @@
 package base;
 
-import model.Core;
 import model.input.handlers.InputHandler;
 import model.input.handlers.PlayerKeyHandler;
 import model.input.handlers.PlayerMouseHandler;

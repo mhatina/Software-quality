@@ -1,4 +1,4 @@
-package model;
+package base;
 
 import presentation.FullScreenWindow;
 import presentation.ScreenManager;
