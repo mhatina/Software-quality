@@ -52,25 +52,19 @@ public class Main {
         gameCore.run();
     }
 
-    private void actualizePathOfPlayers() {
-        for (Player player : manager.getPlayers()) {
-            player.actualizePath();
+    private void actualizePathOfPlayers(Player player) {
+        player.actualizePath();
+    }
+
+    private void checkPlayersCollision(Player player) {
+        for (Player opponent : manager.getPlayers()) {
+            if (player != opponent && player.hasCollided(opponent))
+                gameCore.stop();
         }
     }
 
-    private void checkPlayersCollision() {
-        for (Player player : manager.getPlayers()) {
-            for (Player opponent : manager.getPlayers()) {
-                if (player != opponent && player.hasCollided(opponent))
-                    gameCore.stop();
-            }
-        }
-    }
-
-    private void movePlayers() {
-        for (Player player : manager.getPlayers()) {
-            player.moveInDirection(gameCore.getFullScreenWindow());
-        }
+    private void movePlayers(Player player) {
+        player.moveInDirection(gameCore.getFullScreenWindow());
     }
 
     public static void main(String[] args) {
@@ -91,9 +85,11 @@ public class Main {
     public class Update implements Function<Long, Void> {
 
         public Void apply(Long aLong) {
-            movePlayers();
-            checkPlayersCollision();
-            actualizePathOfPlayers();
+            for (Player player : manager.getPlayers()) {
+                movePlayers(player);
+                checkPlayersCollision(player);
+                actualizePathOfPlayers(player);
+            }
 
             Draw.drawPlayground(gameCore.getFullScreenWindow(), manager.getPlayers());
 
