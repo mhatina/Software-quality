@@ -42,7 +42,7 @@ public class Main {
                            new PlayerKeyHandler(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT),
                            Color.green));
         manager.addPlayer(
-                new Player(new Position(300, 220),
+                new Player(new Position(302, 222),
                            Direction.LEFT,
                            new PlayerMouseHandler(),
                            Color.yellow));

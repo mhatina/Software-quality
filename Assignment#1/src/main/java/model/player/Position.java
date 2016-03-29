@@ -1,5 +1,6 @@
 package model.player;
 
+import base.Main;
 import presentation.Bounds;
 
 /**
@@ -41,8 +42,8 @@ public class Position {
 
         Position position = (Position) o;
 
-        if (x != position.x) return false;
-        return y == position.y;
+        if (Math.abs(x - position.x) >= Main.MOVE_AMOUNT) return false;
+        return Math.abs(y - position.y) < Main.MOVE_AMOUNT;
 
     }
 
